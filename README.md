@@ -22,7 +22,7 @@ The file should look like this:
     
 You will also need to install morse_complete.ino on the Shrimp or Arduino.
 
-![Shrimp and Pi](images/shrimp-pi.jpg)
+![Shrimp and Pi](manuscript/images/shrimp-pi.jpg)
 
 The Shrimp's CP2012 should be connected to a USB port on the Pi.
 
