@@ -33,3 +33,10 @@ Operating System you are using.
 
 I have had limited success using the Shrimp's CP2012 with recent versions of OS/X.
 If you are a Mac user you may prefer to use an Arduino.
+
+## Blog posts
+
+I've made a couple of blog posts about this project.
+
+[Introduction](http://blog.rareschool.com/2015/02/tweeting-morse-code-with-raspberry-pi.html)
+[Update](http://blog.rareschool.com/2015/03/shrimp-and-raspberry-pi-run-morse.html)
