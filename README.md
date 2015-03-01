@@ -9,7 +9,7 @@ The Pi requires py-serial and twython.
 Install the Python script in a directory of your choice.
 
 You will also need credentials(an application key and secret) to search twitter,
-which you can obtain from [the twitter dev site]()
+which you can obtain from [the twitter dev site](https://dev.twitter.com/)
 
 The Python code uses Oauth2; once you have an application key and secret,
 create a file called twitter.ini in a (new) sub-directory called secrets.
