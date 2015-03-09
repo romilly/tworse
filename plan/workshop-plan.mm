@@ -1,16 +1,17 @@
 <map version="1.0.1">
 <!-- To view this file, download free mind mapping software FreeMind from http://freemind.sourceforge.net -->
-<node CREATED="1266488194781" ID="Freemind_Link_1331878192" MODIFIED="1399884031997">
+<node CREATED="1266488194781" ID="Freemind_Link_1331878192" MODIFIED="1425746102340">
 <richcontent TYPE="NODE"><html>
   <head>
     
   </head>
   <body>
     <p>
-      plan
+      twose plan
     </p>
   </body>
-</html></richcontent>
+</html>
+</richcontent>
 <node COLOR="#37a3cb" CREATED="1266488217621" ID="Freemind_Link_1242386705" MODIFIED="1266488568255" POSITION="right" TEXT="Goal">
 <node CREATED="1425226276797" ID="ID_1845064156" MODIFIED="1425226300724" TEXT="Outstanding workshop at CG">
 <node CREATED="1425226302292" ID="ID_1206964827" MODIFIED="1425226313104" TEXT="Everyone completes successfully"/>
@@ -23,11 +24,11 @@
 <node CREATED="1425226368420" ID="ID_410031365" MODIFIED="1425226390284" TEXT="Get s/w working">
 <icon BUILTIN="button_ok"/>
 </node>
-<node CREATED="1425226394052" ID="ID_220803329" MODIFIED="1425226402047" TEXT="document workshop steps"/>
 <node CREATED="1425226422380" ID="ID_1282495896" MODIFIED="1425226490108" TEXT="identify and agree">
-<node CREATED="1425226483699" ID="ID_261250705" MODIFIED="1425226483699" TEXT="h/w requirements"/>
 <node CREATED="1425226490644" ID="ID_475894684" MODIFIED="1425226497112" TEXT="prereqs"/>
+<node CREATED="1425226483699" ID="ID_261250705" MODIFIED="1425226483699" TEXT="h/w requirements"/>
 </node>
+<node CREATED="1425226394052" ID="ID_220803329" MODIFIED="1425226402047" TEXT="document workshop steps"/>
 </node>
 <node COLOR="#de5613" CREATED="1266488223477" ID="Freemind_Link_857865306" MODIFIED="1266488636684" POSITION="right" TEXT="Tasks">
 <node CREATED="1425226540580" ID="ID_740990556" MODIFIED="1425226550016" TEXT="generate alternative configs">
@@ -45,8 +46,7 @@
       Checked this out, works fine for the Shrimp. Need to try with Arduino, will probably need UDEV rule :(
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 <node CREATED="1425226716148" ID="ID_1209497207" MODIFIED="1425226721256" TEXT="need USB hub">
 <node CREATED="1425226723852" ID="ID_224781983" MODIFIED="1425226728832" TEXT="mouse"/>
 <node CREATED="1425226729508" ID="ID_1150011184" MODIFIED="1425226731560" TEXT="kbd"/>
