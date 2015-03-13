@@ -244,16 +244,8 @@ the code, you'll need to get your own credentials and plug thm in. You'll find d
 
 I'd appreciate some feedback about the workshop. 
 There's an on-line survey which should take you no more than 5 minutes to complete.
-That will help me to improve this and other workshops in the future. Please [complete it now]() while the workshop is
+That will help me to improve this and other workshops in the future. Please
+[complete it right now](https://www.surveymonkey.com/s/LCQXSFZ) while the workshop is
 fresh in your mind.
  
 ## Appendix A
-
-
-
-
-
-
-
-
-
