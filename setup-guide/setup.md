@@ -17,8 +17,7 @@
 
 and one of
 
-- An Arduino UNO with A to B USB cable
+- An Arduino UNO with an A to B USB cable
 - A Shrimp with its CP2102 programmer
-
 
 Items in *italics* wil be **provided by the organisers**.

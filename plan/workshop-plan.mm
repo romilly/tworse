@@ -1,13 +1,13 @@
 <map version="1.0.1">
 <!-- To view this file, download free mind mapping software FreeMind from http://freemind.sourceforge.net -->
-<node CREATED="1266488194781" ID="Freemind_Link_1331878192" MODIFIED="1425746102340">
+<node CREATED="1266488194781" ID="Freemind_Link_1331878192" MODIFIED="1426166502922">
 <richcontent TYPE="NODE"><html>
   <head>
     
   </head>
   <body>
     <p>
-      twose plan
+      tworse plan
     </p>
   </body>
 </html>
@@ -91,6 +91,7 @@
 </node>
 <node COLOR="#36d12a" CREATED="1266488273147" ID="Freemind_Link_1517433488" MODIFIED="1266488921179" TEXT="Ideas">
 <icon BUILTIN="idea"/>
+<node CREATED="1426239679782" ID="ID_998989949" MODIFIED="1426239687849" TEXT="Vine of SOS flashing"/>
 </node>
 <node COLOR="#9679df" CREATED="1266488793745" ID="Freemind_Link_1954142386" MODIFIED="1266488959040" TEXT="Fridge">
 <icon BUILTIN="desktop_new"/>
