@@ -1,0 +1,160 @@
+<h1 id="tworse---twitter-in-morse-code">Tworse - Twitter in Morse Code</h1>
+<h2 id="introduction">Introduction</h2>
+<p>The application reads tweets containing a specified hashtag or search term and displays them in Morse code.</p>
+<p>It makes use of the Arduino's real-time processing and the huge library of open source software that can run on the Pi.</p>
+<h3 id="what-youll-do">What you'll do</h3>
+<ol style="list-style-type: decimal">
+<li>You'll start by installing the Arduino IDE on the Pi, and use that to upload the Morse flasher program to the Arduino.</li>
+<li>Next you will use the Serial Monitor to check that the Arduino sketch is working as expected.</li>
+<li>Once that's working, you'll install and test <em>PySerial</em>, a Python program that can drive the Pi's serial port.</li>
+<li>Next you'll install and configure <em>twython</em>, a Python package that can be used to interact with twitter.</li>
+<li>Finally you will write a short Python script that searches Twitter and sends the tweets it finds over the serial connection to the Arduino.</li>
+</ol>
+<h3 id="what-youll-need">What you'll need</h3>
+<ol style="list-style-type: decimal">
+<li>A Raspberry Pi Model B, B+ or Pi 2 with a recent version of Raspbian installed</li>
+<li>A Keyboard</li>
+<li>A Mouse</li>
+<li>A monitor with HDMI cable</li>
+<li>A 5v 1A power supply</li>
+<li>If you're using a Model B or B+, a powered, Pi-compatible USB hub</li>
+<li>An Ethernet connection, wireless or wired.</li>
+<li>Access to a twitter account so yu can send some test tweets.</li>
+<li>A zip file with the code for the Morse Flasher. (It also has a completed version of the Python script). You can <a href="https://github.com/romilly/tworse/blob/master/zip/tworse.zip">click here to download it</a>. and one of</li>
+</ol>
+<ul>
+<li>An Arduino UNO with an A to B USB cable</li>
+<li>A Shrimp with its CP2102 programmer</li>
+</ul>
+<p>If you haven't heard of the Shrimp, it's a low-cost Arduino clone that you can build yourself on a breadboard. If you would like to make one, I've published an e-book called <a href="https://leanpub.com/makingtheshrimp"><em>Making the Shrimp</em></a> with step-by-step instructions.</p>
+<p>Let's get started on the tworse project!</p>
+<h2 id="installing-the-arduino-ide">Installing the Arduino IDE</h2>
+<p>If you haven't got the Arduino IDE installed on your Pi, now is the time to do it.</p>
+<p>From the command line or a terminal window, type</p>
+<pre><code>sudo apt-get update
+sudo apt-get update
+sudo apt-get install arduino</code></pre>
+<p>The installation will take several minutes. At the time of writing, the Arduino version in the Raspbian repository is quite old (1.0.1). While that means it won't work with the more recent Arduino boards, it will work with the Uno and the Shrimp.</p>
+<p>The instructions that follow generally apply to both the Arduino Uno and the Shrimp. If you need to do different things with Arduino and Shrimp the instructions will make this clear.</p>
+<h3 id="connecting-the-pi-and-arduino">Connecting the Pi and Arduino</h3>
+<p>This is really simple!</p>
+<ol style="list-style-type: decimal">
+<li>If you're using an Arduino Uno, connect the USB cable from a free USB socket on the Pi to the USB port on the Arduino</li>
+<li>If you're using a Shrimp, plug the CP2102 programmer into a spare USB socket on the Pi.</li>
+</ol>
+<h2 id="upload-the-morse-sketch-to-the-arduino">Upload the Morse sketch to the Arduino</h2>
+<h3 id="start-up-the-arduino-ide">Start up the Arduino IDE</h3>
+<p>If you've been using the command line, start the window manager by typing</p>
+<pre><code>startx</code></pre>
+<p>Once you can see the desktop, look in the application menu under Electronics and click on <em>Arduno IDE</em>.</p>
+<p>The Arduino IDE should start; you'll see a screen like this:</p>
+<div class="figure">
+<img src="images/2015-03-13-141148_498x567_scrot.png" />
+
+</div>
+<h3 id="check-that-the-arduino-or-shrimp-is-visible-to-the-ide">Check that the Arduino or Shrimp is visible to the IDE</h3>
+<p>Under <code>Tools/Serial Port</code> check that you can see <code>/dev/tty/ACM0</code> if you're using an Arduino, or<code>/dev/ttyUSB0</code> if you're using a Shrimp.</p>
+<h3 id="set-the-correct-board-type">Set the correct board type</h3>
+<p>Whether you are using an Arduino Uno or Shrimp, make sure the <code>file/board type</code> is set to Arduino Uno</p>
+<h3 id="check-it-out">Check it out</h3>
+<p>Open the Blink sketch <code>File/Examples/01.Basics/Blink</code> and upload it to the Arduino or Shrimp.</p>
+<p>If you see a message 'done uploading' as in the image below all is well.</p>
+<div class="figure">
+<img src="images/2015-03-14-051213_498x567_scrot.png" />
+
+</div>
+<h3 id="upload-and-test">Upload and test</h3>
+<p>Download the <a href="https://github.com/romilly/tworse/blob/master/zip/tworse.zip">tworse project zip file</a></p>
+<p>If you haven't done so already and unzip it in the directory of your choice.</p>
+<p>From the Arduino IDE, open the file morse_complete.ino and upload the file.</p>
+<div class="figure">
+<img src="images/2015-03-13-150749_498x567_scrot.png" />
+
+</div>
+<p>Open the Serial Monitor, check the baud rate is 600 and set the line terminator to Newline.</p>
+<div class="figure">
+<img src="images/2015-03-13-151242_630x324_scrot.png" />
+
+</div>
+<p>In the Serial Monitor text entry field, type SOS and press return.</p>
+<p>You should see three short, three long and three short flashes of the onboard LED, and the Serial Monitor should display the Morse code as dots and dashes.</p>
+<div class="figure">
+<img src="images/2015-03-13-151336_630x324_scrot.png" alt="SOS" />
+<p class="caption">SOS</p>
+</div>
+<h2 id="using-pyserial">Using PySerial</h2>
+<p>Since you want to send tweets from the Pi to the Arduino, yu need some way of sending data over the Serial link from within a program. The software you will use is called PySerial.</p>
+<p>In a Raspberry Pi command window, type</p>
+<pre><code>sudo apt-get install python-serial </code></pre>
+<p>You can do a very quick test to verify the installation.</p>
+<p>In a command window, type</p>
+<pre><code>python</code></pre>
+<p>You should see an Python interactive window.</p>
+<div class="figure">
+<img src="images/2015-03-14-053256_657x392_scrot.png" />
+
+</div>
+<p>Enter the following, one line at a time <!-- TODO: check --></p>
+<p><strong>NB:</strong> If you are using a Shrimp, replace <code>'/dev/ttyACM0'</code> with <code>'/dev/ttyUSB0'</code>in the second line below.</p>
+<pre><code>import serial
+port=&#39;/dev/ttyACM0&#39;
+ser = serial.Serial(port, 9600)
+ser.write(&#39;SOS\n&#39;)</code></pre>
+<p>You should see the LED flash.</p>
+<p>In the Python session, type</p>
+<pre><code>ser.readline()</code></pre>
+<p>You should see the dot-and-dash text version Morse code of your message displayed.</p>
+<h2 id="using-twython">Using twython</h2>
+<p>There are several Python packages that can interact with Twitter through the Twitter API. We'll be using <a href="https://twython.readthedocs.org/en/latest/">twython</a></p>
+<h3 id="using-the-twitter-api">Using The Twitter API</h3>
+<p>These days, any application that wants to use the Twitter API must use credentials to identify who is asking for access. Credentials specify who you claim to be and offer proof in the form of a secret, like a password)</p>
+<p>In addition, Twitter limits the number of API requests that a user can make in a given time period.</p>
+<p>Applying for your own Twitter Credentials is easy but a little time-consuming, and you need to have your own Twitter account to apply.</p>
+<!-- TODO: add note to clarify what to do in the book version -->
+<p>To keep things simple and save time, you'll be given credentials that you can use during the workshop.</p>
+<p><strong>Please don't abuse them.</strong></p>
+<p>If you make too many requests,<strong>you and all the others will be locked out of the Twitter API</strong> temporarily or permanently.</p>
+<p>That shouldn't happen if you use the code described below.</p>
+<h3 id="installing-twython">Installing twython</h3>
+<!-- TODO: add details -->
+<h3 id="testing-twython">Testing twython</h3>
+<p>Send a test tweet with the hashtag #morsetweeter</p>
+<p>Re-open an interactive Python session if you need to, and type the following, one line at a time:</p>
+<pre><code>from credentials import parse
+from twython import Twython
+ini = parse(&#39;secrets/twitter.ini&#39;)
+key = ini[&#39;KEY&#39;]
+secret = ini[&#39;SECRET&#39;]
+tw = Twython(key, secret, oauth_version=2)
+twitter = Twython(key, access_token=tw.obtain_access_token())
+tweets = twitter.search(q=&#39;#morsetweeter&#39;)
+for status in tweets[&#39;statuses&#39;]:
+    print status[&#39;text&#39;]</code></pre>
+<p>You should see your tweet among any others people have sent with the hashtag.</p>
+<p>Here's how it works:</p>
+<pre><code>from credentials import parse
+from twython import Twython</code></pre>
+<p>imports a litle helper function called <code>parse</code> which can read yourTwitter credentials from a file, and imports the Twython class from the twython pacakge so you can use them in your program.</p>
+<pre><code>ini = parse(&#39;secrets/twitter.ini&#39;)
+key = ini[&#39;KEY&#39;]
+secret = ini[&#39;SECRET&#39;]</code></pre>
+<p>uses <code>parse</code> to read a credentials file called <code>twitter.ini</code> from the <code>secrets</code> directory and extracts the API key and the secret (or password).</p>
+<pre><code>tw = Twython(key, secret, oauth_version=2)
+twitter = Twython(key, access_token=tw.obtain_access_token())</code></pre>
+<p>authenticates you using the credentials provided.</p>
+<pre><code>tweets = twitter.search(q=&#39;#morsetweeter&#39;)</code></pre>
+<p>sends a request to Twitter asking for all the recent tweets containing the hashtag #morsetweeter.</p>
+<pre><code>for status in tweets[&#39;statuses&#39;]:
+    print status[&#39;text&#39;]
+    </code></pre>
+<p>iterates through the list of tweets, extracting the status and printing its text in the interactive Python window.</p>
+<p>That's it!</p>
+<h2 id="putting-it-all-together">Putting it all together</h2>
+<p>The final stage is to link up the code that reads tweets with the code that sends data to the Modse Flasher.</p>
+<p>You can probably do that yourself, but if you get stuck there's a working solution in the Python directory.</p>
+<p>It's called <code>twython-reader.py</code>and if you change to the python sub-directory of the place where you unzipped <code>tworse.zip</code>you can run it by typing <code>'python tworse.zip</code>.</p>
+<p><strong>NB:</strong> Don't do this too often or you'll breach Twitter's API rate limits!</p>
+<h2 id="what-next">What next?</h2>
+<p>The credentials you've used in the workshop will stop working once the worksop is over. If you want to continue to use the code, you'll need to get your own credentials and plug thm in. You'll find details of how to do this in Appendix A.</p>
+<p>I'd appreciate some feedback about the workshop. There's an on-line survey which should take you no more than 5 minutes to complete. That will help me to improve this and other workshops in the future. Please <a href="https://www.surveymonkey.com/s/LCQXSFZ">complete it right now</a> while the workshop is fresh in your mind.</p>
+<h2 id="appendix-a">Appendix A</h2>

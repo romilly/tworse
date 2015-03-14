@@ -26,15 +26,15 @@ connection to the Arduino.
 1. An Ethernet connection, wireless or wired.
 1. Access to a twitter account so yu can send some test tweets.
 1. A zip file with the code for the Morse Flasher. (It also has a completed version of the Python script).
-<!-- TODO: add zip file location --> You can [download the zip file here]().
-
+You can [click here to download it](https://github.com/romilly/tworse/blob/master/zip/tworse.zip).
 and one of
 
 - An Arduino UNO with an A to B USB cable
 - A Shrimp with its CP2102 programmer
 
 If you haven't heard of the Shrimp, it's a low-cost Arduino clone that you can build yourself on a breadboard.
-If you would like to make one, I've published an e-book called [*Making the Shrimp*](https://leanpub.com/makingtheshrimp)
+If you would like to make one, I've published an e-book called
+[*Making the Shrimp*](https://leanpub.com/makingtheshrimp)
 with step-by-step instructions.
 
 Let's get started on the tworse project!
@@ -53,6 +53,9 @@ The installation will take several minutes. At the time of writing, the Arduino 
 quite old (1.0.1). While that means it won't work with the more recent Arduino boards, it will work with the Uno and
 the Shrimp.
 
+The instructions that follow generally apply to both the Arduino Uno and the Shrimp.
+If you need to do different things with Arduino and Shrimp the instructions will make this clear.
+
 ### Connecting the Pi and Arduino
 
 This is really simple!
@@ -64,18 +67,19 @@ This is really simple!
 
 ### Start up the Arduino IDE
 
-If you've ben using the command line, start the window manager by typing
+If you've been using the command line, start the window manager by typing
 
     startx
     
-Once you can se the desktop, look in the  application menu under Electronics and click on *Arduno IDE*.
+Once you can see the desktop, look in the  application menu under Electronics and click on *Arduno IDE*.
 
 The Arduino IDE should start; you'll see a screen like this:
-TODO: add screen shot
+
+![](images/2015-03-13-141148_498x567_scrot.png)
 
 ### Check that the Arduino or Shrimp is visible to the IDE
 
-Under `file/port` check that you can see `/dev/tty/ACM0` if you're using an Arduino, or`/dev/ttyUSB0`
+Under `Tools/Serial Port` check that you can see `/dev/tty/ACM0` if you're using an Arduino, or`/dev/ttyUSB0`
 if you're using a Shrimp.
 
 ### Set the correct board type
@@ -84,42 +88,41 @@ Whether you are using an Arduino Uno or Shrimp, make sure the `file/board type` 
 
 ### Check it out
 
-Open the Blink sketch <!-- TODO: add menu and upload it to the Arduino or Shrimp. -->
+Open the Blink sketch `File/Examples/01.Basics/Blink` and upload it to the Arduino or Shrimp.
 
-If you see a message 'done uploading' as in the image below <!-- TODO: add image --> all is well.
+If you see a message 'done uploading' as in the image below all is well.
+
+![](images/2015-03-14-051213_498x567_scrot.png)
 
 ### Upload and test
 
-Download the tworse porject zip file if you haven't done so already <!-- TODO: add zip file location --> and
-unzip it in the directory of your choice.
+Download the [tworse project zip file](https://github.com/romilly/tworse/blob/master/zip/tworse.zip)
 
-From the Arduino IDE, open the file morse_complete.ino.
+If you haven't done so already and unzip it in the directory of your choice.
 
-Upload the file.
+From the Arduino IDE, open the file morse_complete.ino and upload the file.
 
-<!-- TODO: add image -->
+![](images/2015-03-13-150749_498x567_scrot.png)
 
-Open the Serial Monitor, <!-- TODO: add image -->
+Open the Serial Monitor, check the baud rate is 600 and set the line terminator to Newline.
 
-Check the baud rate is 600 and set the line terminator to Newline. <!-- TODO: add image -->
+![](images/2015-03-13-151242_630x324_scrot.png)
 
 In the Serial Monitor text entry field, type SOS and press return.
 
 You should see three short, three long and three short flashes of the onboard LED, and the Serial Monitor should
 display the Morse code as dots and dashes.
 
-<!-- TODO: add image -->
+![SOS](images/2015-03-13-151336_630x324_scrot.png)
 
 ## Using PySerial
 
-<!-- TODO: check that we've explained that Arduino == Arduino or Shrimp unless otherwise specified -->
-
-Since you want to send tweets from the Pi to the Arduino, yu need some way of sending data over th Seria link from
+Since you want to send tweets from the Pi to the Arduino, yu need some way of sending data over the Serial link from
 within a program. The software you will use is called PySerial.
 
 In a Raspberry Pi command window, type
 
-    sudo apt-get install python-pyserial <!-- TODO: check -->
+    sudo apt-get install python-serial 
     
 You can do a very quick test to verify the installation.
 
@@ -127,9 +130,11 @@ In a command window, type
 
     python
     
-You should see an Python interactive window. <!-- TODO: add image -->
+You should see an Python interactive window.
+ 
+![](images/2015-03-14-053256_657x392_scrot.png)
 
-Enter the following, one line at a time <!-- TODO: check -->
+Enter the following, one line at a time
 
 **NB:** If you are using a Shrimp, replace `'/dev/ttyACM0'` with `'/dev/ttyUSB0'`in the second line below.
 
@@ -138,13 +143,16 @@ Enter the following, one line at a time <!-- TODO: check -->
     ser = serial.Serial(port, 9600)
     ser.write('SOS\n')
 
-You should see the LED flash.
+The last line will print the number 4, to show that 4 characters have been  transmitted - *SOS* and a newline.
+You should see the LED flash - three short flashes, three long flashes, and three shirt flashes.
 
 In the Python session, type
 
     ser.readline()
     
 You should see the dot-and-dash text version Morse code of your message displayed.
+
+Close the python session by typing `exit()`.
 
 ## Using twython
 
@@ -167,7 +175,7 @@ To keep things simple and save time, you'll be given credentials that you can us
 
 **Please don't abuse them.** 
 
-If you make too many requests,**you and all the others will be locked out of the Twitter API**
+If you make too many requests, **you and all the others will be locked out of the Twitter API**
 temporarily or permanently.
 
 That shouldn't happen if you use the code described below.
@@ -180,7 +188,7 @@ That shouldn't happen if you use the code described below.
 
 Send a test tweet with the hashtag #morsetweeter
 
-Re-open an interactive Python session if you need to, and type the following, one line at a time:
+Re-open an interactive Python session , and type the following, one line at a time:
 
     from credentials import parse
     from twython import Twython
