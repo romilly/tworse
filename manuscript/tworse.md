@@ -75,7 +75,7 @@ Once you can see the desktop, look in the  application menu under Electronics an
 
 The Arduino IDE should start; you'll see a screen like this:
 
-![](images/2015-03-13-141148_498x567_scrot.png)
+![IDE](images/2015-03-13-141148_498x567_scrot.png)
 
 ### Check that the Arduino or Shrimp is visible to the IDE
 
@@ -92,7 +92,7 @@ Open the Blink sketch `File/Examples/01.Basics/Blink` and upload it to the Ardui
 
 If you see a message 'done uploading' as in the image below all is well.
 
-![](images/2015-03-14-051213_498x567_scrot.png)
+![one uploading](images/2015-03-14-051213_498x567_scrot.png)
 
 ### Upload and test
 
@@ -102,11 +102,11 @@ If you haven't done so already and unzip it in the directory of your choice.
 
 From the Arduino IDE, open the file morse_complete.ino and upload the file.
 
-![](images/2015-03-13-150749_498x567_scrot.png)
+![Upload](images/2015-03-13-150749_498x567_scrot.png)
 
 Open the Serial Monitor, check the baud rate is 600 and set the line terminator to Newline.
 
-![](images/2015-03-13-151242_630x324_scrot.png)
+![Monitor](images/2015-03-13-151242_630x324_scrot.png)
 
 In the Serial Monitor text entry field, type SOS and press return.
 
