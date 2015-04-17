@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The application reads tweets containing a specified hashtag or search term and displays them in Morse code.
+The Tworse application reads tweets containing a specified hashtag or search term and displays them in Morse code.
 
 It makes use of the Arduino's real-time processing and the huge library of open source software that can run on the Pi.
 
@@ -24,7 +24,7 @@ connection to the Arduino.
 1. A 5v 1A power supply
 1. If you're using a Model B or B+, a powered, Pi-compatible USB hub
 1. An Ethernet connection, wireless or wired.
-1. Access to a twitter account so yu can send some test tweets.
+1. Access to a twitter account so you can send some test tweets.
 1. A zip file with the code for the Morse Flasher. (It also has a completed version of the Python script).
 You can [click here to download it](https://github.com/romilly/tworse/blob/master/zip/tworse.zip).
 and one of
@@ -32,12 +32,14 @@ and one of
 - An Arduino UNO with an A to B USB cable
 - A Shrimp with its CP2102 programmer
 
-If you haven't heard of the Shrimp, it's a low-cost Arduino clone that you can build yourself on a breadboard.
+If you haven't heard of the Shrimp, it's a low-cost Arduino clone that you can build yourself on a breadboard or
+stripboard.
+
 If you would like to make one, I've published an e-book called
 [*Making the Shrimp*](https://leanpub.com/makingtheshrimp)
 with step-by-step instructions.
 
-Let's get started on the tworse project!
+Let's get started on the Tworse project!
 
 ## Installing the Arduino IDE
 
